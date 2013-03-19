@@ -1,11 +1,12 @@
 (ns leiningen.thrush
-  (:require [leiningen.core.main :as main]))
+  (:require [leiningen.core.main :as main] [leiningen.do :refer [group-args]]))
 
-(defn run-task [project acc task-name]
-  (main/apply-task (main/lookup-alias task-name project) project [acc]))
+(defn ^:no-project-needed ^:higher-order thrush
+  "Like ->, but for leiningen tasks.
 
-(defn ^:higher-order thrush
-  "Run a series of tasks, passing the return value of one to the next."
-  [project first-task & tasks]
-  (let [init (main/apply-task (main/lookup-alias first-task project) project)]
-    (reduce (partial project run-task) tasks)))
+Each comma-separated group should be a task name followed by optional arguments."
+  [project & tasks]
+  (reduce (fn [acc [task-name & args]]
+            [(main/apply-task (main/lookup-alias task-name project) project
+                              (reduce conj acc args))])
+          [] (group-args tasks)))
