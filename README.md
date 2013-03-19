@@ -4,7 +4,8 @@ A Leiningen plugin to thread execution.
 
 ## Usage
 
-Put `[lein-thrush "0.1.0"]` into the `:plugins` vector of your project.clj.
+Put `[lein-thrush "0.1.1"]` into the `:plugins` vector of your
+project.clj or user profile.
 
 Assuming you have an `upload` task that takes a project map and a
 file to upload, this will upload the jar file:

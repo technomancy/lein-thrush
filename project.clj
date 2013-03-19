@@ -1,4 +1,4 @@
-(defproject lein-thrush "0.1.0"
+(defproject lein-thrush "0.1.1"
   :description "Like ->, but for Leiningen tasks"
   :url "https://github.com/technomancy/lein-thrush"
   :license {:name "Eclipse Public License"
